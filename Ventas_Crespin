@@ -1,0 +1,97 @@
+create schema VENTAS;
+use VENTAS; 
+
+
+CREATE TABLE clientes(
+  id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+  nombre_cliente VARCHAR(45),
+  dni_cliente int UNIQUE,
+  direccion VARCHAR(45),
+  email VARCHAR(45) UNIQUE
+);
+
+
+CREATE TABLE vendedor(
+	id_vendedor INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_vendedor VARCHAR(45),
+    dni_vendedor int unique,
+    direccion VARCHAR(45),
+	comision VARCHAR(45),
+    rendimiento VARCHAR(45)
+);
+
+
+CREATE TABLE proveedor(
+	id_proveedor INT PRIMARY KEY,
+    nombre_proveedor VARCHAR(45),
+    direccion VARCHAR(45),
+	email VARCHAR(45) UNIQUE,
+    numero_cuenta int UNIQUE
+);
+
+
+CREATE TABLE categoria_producto(
+    id_categoria INT PRIMARY KEY,
+    tipo_producto VARCHAR(45),
+    id_proveedor_categoria INT UNIQUE,
+    stock int,
+    
+FOREIGN KEY (id_proveedor_categoria) REFERENCES proveedor(id_proveedor)
+);
+
+
+CREATE TABLE producto(
+	id_producto INT PRIMARY KEY,
+    nombre_producto VARCHAR(45),
+    proveedor_producto int unique,
+	precio int,
+    categoria int unique,
+    stock int,
+    
+FOREIGN KEY (proveedor_producto) REFERENCES proveedor(id_proveedor)
+);
+
+
+CREATE TABLE compra(
+	num_factura INT PRIMARY KEY AUTO_INCREMENT,
+    fecha DATETIME,
+    vendedor_factura int,
+	cliente_factura int,
+    productos_factura int,
+    total int,
+    
+FOREIGN KEY (vendedor_factura) REFERENCES vendedor(id_vendedor),
+FOREIGN KEY (cliente_factura) REFERENCES clientes(id_cliente),
+FOREIGN KEY (productos_factura) REFERENCES producto(id_producto)
+);
+
+
+CREATE TABLE pagos(
+  id_pago INT PRIMARY KEY AUTO_INCREMENT,
+  nombre_pago varchar (45) not null,
+  factura int not null,
+  
+FOREIGN KEY (factura) REFERENCES compra(num_factura)
+);
+
+
+INSERT INTO clientes VALUES 
+(NULL, "Pepe Luis", 22722777 , "Jacinto rios 222", 'pepe_lios@dato.com'),
+(NULL, "Nina Goitea", 9444555 , "Arturo Orgaz 132", 'ninita22@dato.com'),
+(NULL, "Nelson Crespo", 12589664 , "Los Aromos 15 1° A", 'nelsito_laT@dato.com'),
+(NULL, "Paolo Chancalay", 24569874 , "Mendoza 3030", 'PaoloChan@dato.com'),
+(NULL, "Roolando Bruno Crespin", 45889321 , "Gongora 1000", 'Rollo_zumaran@dato.com');
+SELECT * FROM clientes;
+
+INSERT INTO vendedor VALUES 
+(NULL, "Lauro Acosta", 21546879 , "Carcano 78", '3%', '100%'),
+(NULL, "Lucas Moyano", 4588778 , "Rosario 42", '3%', '90%'),
+(NULL, "Liliana Corbalan", 36548912 , "Maracaibo 132", '3%', '75%'),
+(NULL, "Nahuel Rivera", 39302587 , "Dean Funes 12", '3%', '85%'),
+(NULL, "Natali Verdun", 40587963 , "Mendoza 2058", '3%', '100%');
+SELECT * FROM vendedor;
+
+UPDATE clientes
+SET nombre_cliente = 'Rolando Crespín'
+WHERE dni_cliente = '45889321';
+ Select * from clientes;
