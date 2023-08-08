@@ -22,7 +22,7 @@ CREATE TABLE vendedor(
 
 
 CREATE TABLE proveedor(
-	id_proveedor INT PRIMARY KEY,
+	id_proveedor INT PRIMARY KEY auto_increment,
     nombre_proveedor VARCHAR(45),
     direccion VARCHAR(45),
 	email VARCHAR(45) UNIQUE,
@@ -31,9 +31,9 @@ CREATE TABLE proveedor(
 
 
 CREATE TABLE categoria_producto(
-    id_categoria INT PRIMARY KEY,
+    id_categoria INT PRIMARY KEY auto_increment,
     tipo_producto VARCHAR(45),
-    id_proveedor_categoria INT UNIQUE,
+    id_proveedor_categoria INT,
     stock int,
     
 FOREIGN KEY (id_proveedor_categoria) REFERENCES proveedor(id_proveedor)
@@ -41,19 +41,20 @@ FOREIGN KEY (id_proveedor_categoria) REFERENCES proveedor(id_proveedor)
 
 
 CREATE TABLE producto(
-	id_producto INT PRIMARY KEY,
+	id_producto INT PRIMARY KEY auto_increment,
     nombre_producto VARCHAR(45),
-    proveedor_producto int unique,
+    proveedor_producto int,
 	precio int,
-    categoria int unique,
+    categoria int,
     stock int,
     
-FOREIGN KEY (proveedor_producto) REFERENCES proveedor(id_proveedor)
+FOREIGN KEY (proveedor_producto) REFERENCES proveedor(id_proveedor),
+FOREIGN KEY (categoria) REFERENCES categoria_producto(id_categoria)
 );
 
 
 CREATE TABLE compra(
-	num_factura INT PRIMARY KEY AUTO_INCREMENT,
+	num_factura INT PRIMARY KEY AUTO_INCREMENT auto_increment,
     fecha DATETIME,
     vendedor_factura int,
 	cliente_factura int,
@@ -93,5 +94,5 @@ SELECT * FROM vendedor;
 
 UPDATE clientes
 SET nombre_cliente = 'Rolando Crespín'
-WHERE dni_cliente = '45889321';
+WHERE dni_cliente = 45889321;
  Select * from clientes;
