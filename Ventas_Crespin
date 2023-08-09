@@ -96,3 +96,118 @@ UPDATE clientes
 SET nombre_cliente = 'Rolando Crespín'
 WHERE dni_cliente = 45889321;
  Select * from clientes;
+ 
+ Select * from proveedor;
+ 
+ 
+INSERT INTO proveedor (nombre_proveedor, direccion, email, numero_cuenta)
+VALUES
+  ('Calzados del Sur', 'Buenos Aires, Capital', 'calzadossur@example.com', 12345678),
+  ('Zapatería Caminando', 'Córdoba, Ciudad', 'caminando@example.com', 23456789),
+  ('Calzados Argentinos', 'Rosario, Santa Fe', 'calzadosargentinos@example.com', 34567890),
+  ('Zapatos Elegantes', 'Mendoza, Ciudad', 'elegantes@example.com', 45678901),
+  ('Zapatería Moderna', 'San Miguel de Tucumán, Tucumán', 'modernazapatos@example.com', 56789012),
+  ('Calzados Fashion', 'La Plata, Buenos Aires', 'fashioncalzados@example.com', 67890123),
+  ('Zapatería Clásica', 'Mar del Plata, Buenos Aires', 'clasica@example.com', 78901234),
+  ('Calzados Express', 'Salta, Ciudad', 'expresscalzados@example.com', 89012345),
+  ('Zapatería Innovadora', 'Santa Fe, Ciudad', 'innovadorazapatos@example.com', 90123456),
+  ('Calzados Comodos', 'San Juan, Ciudad', 'comodos@example.com', 12345670);
+  select * from proveedor;
+  
+  INSERT INTO categoria_producto (tipo_producto, id_proveedor_categoria, stock)
+VALUES
+  ('Zapatos deportivos', 1, 100),
+  ('Zapatillas casuales', 2, 150),
+  ('Botas de cuero', 3, 80),
+  ('Sandalia de verano', 4, 120),
+  ('Zapatos formales', 5, 90),
+  ('Mocasines de cuero', 6, 110),
+  ('Botines de moda', 7, 70),
+  ('Carteras de cuero', 8, 200),
+  ('Billeteras elegantes', 9, 180),
+  ('Cinturones de moda', 10, 160),
+  ('Productos de limpieza para cuero', 10, 250),
+  ('Crema para calzado', 10, 300),
+  ('Acondicionador de cuero', 10, 270),
+  ('Limpiador de cuero', 10, 220),
+  ('Productos para teñir cuero', 10, 190),
+  ('Zapatos de fiesta', 1, 110),
+  ('Sandalias de cuero', 2, 130),
+  ('Botas de moda', 3, 95),
+  ('Mochilas de cuero', 4, 240),
+  ('Bolsos de mano elegantes', 5, 220);
+  select * from categoria_producto;
+  
+  INSERT INTO producto (nombre_producto, proveedor_producto, precio, categoria, stock)
+VALUES 
+('Zapatos Deportivos Rojos', 1, 5000, 1, 10),
+('Zapatillas Negras Clásicas', 1, 4500, 1, 8),
+('Botas de Cuero Marrones', 1, 8000, 1, 6),
+('Sandalia de Verano Azul', 1, 3000, 1, 12),
+('Zapatos Formales Negros', 1, 6000, 1, 10),
+('Mocasines de Cuero Marrón', 1, 5500, 1, 8),
+('Botines de Moda Grises', 1, 7000, 1, 6),
+('Cartera Elegante de Cuero', 2, 7500, 2, 10),
+('Billetera de Lujo Negra', 2, 3000, 2, 8),
+('Cinturón Moderno de Cuero', 2, 2000, 2, 12),
+('Neceser', 3, 1500, 3, 10),
+('Crema para Calzado de Cuero', 3, 800, 10, 8),
+('Bolsa de Mano Elegante', 2, 6500, 4, 10),
+('Cartera de Cuero con Diseño', 2, 7000, 4, 8),
+('Bolso de Cuero Negro', 2, 9000, 4, 12),
+('Mochila de Cuero Marrón', 3, 8500, 4, 10),
+('Billetera Clásica de Cuero', 3, 3500, 5, 8),
+('Cinturón de Cuero con Hebilla', 3, 1800, 5, 12),
+('Riñonera', 4, 1200, 6, 10),
+('Cepillo de Cuero Suave', 4, 600, 10, 8),
+('Minibag', 4, 1000, 6, 12),
+('Plantillas para Zapatos Cómodas', 5, 400, 6, 10),
+('Zapatos para Niños con Diseño', 5, 2500, 1, 8),
+('Bolsa Cruzada de Cuero Pequeña', 5, 2800, 4, 12),
+('Zapatos Deportivos de Running', 6, 5500, 1, 10),
+('Zapatillas de Moda Grisáceas', 6, 4800, 1, 8),
+('Botas de Montaña Resistentes', 6, 8500, 1, 6),
+('Sandalia Elegante con Tacón', 6, 3200, 1, 12),
+('Zapatos Formales de Cuero', 7, 6200, 1, 10),
+('Mocasines de Cuero Clásicos', 7, 5700, 1, 8),
+('Botines de Cuero Marrones', 7, 7200, 1, 6),
+('Cartera de Cuero Sencilla', 8, 7800, 2, 10),
+('Billetera de Cuero Elegante', 8, 3200, 2, 8),
+('Cinturón de Moda en Cuero', 8, 2200, 2, 12),
+('Stiletto', 9, 1700, 3, 10),
+('Superconfort hombre', 9, 900, 3, 8),
+('Bolsa de Cuero de Mano', 7, 6800, 4, 10),
+('Cartera de Cuero Moderna', 7, 7200, 4, 8),
+('Bolso de Hombro de Cuero', 8, 9500, 4, 12),
+('Mochila de Cuero para Viaje', 9, 8800, 4, 10),
+('Billetera Práctica de Cuero', 9, 3800, 5, 8),
+('Cinturón de Cuero Ajustable', 9, 2000, 5, 12),
+('Removedor de Manchas y Olores', 10, 1300, 6, 10),
+('Cepillo para Limpieza de Cuero', 10, 500, 6, 8),
+('Sandalias de fiesta con strass', 10, 900, 6, 12),
+('Plantillas de Cuero Transpirables', 6, 300, 6, 10),
+('Zapatos Infantiles de Cuero', 7, 2300, 1, 8),
+('Bolso Cruzado de Cuero Compacto', 8, 2600, 4, 12);
+select * from producto;
+
+INSERT INTO compra (fecha, vendedor_factura, cliente_factura, productos_factura, total)
+VALUES
+    (NOW(), 1, 2, 32, 5000),
+    (NOW(), 2, 5, 12, 4500),
+    (NOW(), 3, 7, 4, 8000),
+    (NOW(), 4, 14, 8, 3000),
+    (NOW(), 5, 6, 25, 6000),
+    (NOW(), 1, 8, 39, 5500),
+    (NOW(), 2, 22, 32, 7000);
+select * from compra;
+
+INSERT INTO pagos (nombre_pago, factura)
+VALUES
+    ('EFECTIVO', 1),
+    ('DEBITO MASTEERCARD', 2),
+    ('DEBITO VISA', 3),
+    ('MAESTRO', 4),
+    ('MERCADO PAGO', 5),
+    ('GO CUOTAS', 6),
+    ('NARANJA', 7);
+select * FROM PAGOS; 
