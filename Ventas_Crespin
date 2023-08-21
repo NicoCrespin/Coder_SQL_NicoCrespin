@@ -1,5 +1,5 @@
-create schema VENTAS138;
-use VENTAS138; 
+create schema VENTAS218;
+use VENTAS218; 
 
 
 CREATE TABLE clientes (
@@ -9,9 +9,6 @@ CREATE TABLE clientes (
     direccion VARCHAR(45),
     email VARCHAR(45) UNIQUE
 );
-
-
-
 
 
 CREATE TABLE vendedor (
@@ -82,6 +79,7 @@ CREATE TABLE pagos (
     FOREIGN KEY (factura) REFERENCES compra (num_factura)
 );
 
+-- insercion
 
 INSERT INTO clientes VALUES 
 (NULL,"Pepe Luis", 22722777 , "Jacinto rios 222", 'pepe_lios@dato.com'),
@@ -250,3 +248,158 @@ VALUES
     ('GO CUOTAS', 6),
     ('NARANJA', 7);
 select * FROM PAGOS; 
+
+-- final de insecion
+-- vistas
+
+CREATE VIEW DetalleProducto AS
+SELECT
+    p.nombre_producto AS NombreProducto,
+    cp.tipo_producto AS TipoProducto,
+    pr.nombre_proveedor AS NombreProveedor
+FROM
+    producto p
+JOIN
+    categoria_producto cp ON p.categoria = cp.id_categoria
+JOIN
+    proveedor pr ON p.proveedor_producto = pr.id_proveedor;
+select * from DetalleProducto;
+
+
+CREATE VIEW Facturacion AS
+SELECT
+    c.num_factura AS Factura,
+    v.nombre_vendedor AS Vendedor,
+    cl.nombre_cliente AS Cliente,
+    p.nombre_producto AS Producto,
+    dc.cantidad AS Cantidad,
+    pa.nombre_pago AS Pago,
+    c.total AS Total
+FROM
+    compra c
+JOIN
+    detalles_compra dc ON c.num_factura = dc.id_compra    
+JOIN
+    vendedor v ON c.vendedor_factura = v.id_vendedor
+JOIN
+    clientes cl ON c.cliente_factura = cl.id_cliente
+JOIN
+    producto p ON dc.producto = p.id_producto
+JOIN
+    pagos pa ON c.num_factura = pa.factura;
+select * from Facturacion;
+
+
+CREATE VIEW MasVendidos AS
+SELECT 
+	p.nombre_producto AS Producto, 
+	SUM(dc.cantidad) AS Cantidad
+FROM 
+	producto p
+JOIN 
+	detalles_compra dc ON p.id_producto = dc.producto
+GROUP BY p.nombre_producto
+ORDER BY Cantidad DESC;
+select * from MasVendidos;
+
+
+CREATE VIEW StockActual AS
+SELECT 
+	cp.tipo_producto AS Categoria, 
+	SUM(p.stock) AS StockTotal
+FROM 
+	categoria_producto cp
+JOIN 
+	producto p ON cp.id_categoria = p.categoria
+GROUP BY cp.tipo_producto;
+select *from StockActual;
+
+
+CREATE VIEW VentaTotal AS
+SELECT 
+	c.fecha AS Fecha, 
+	SUM(c.total) AS Total
+FROM 
+	compra c
+GROUP BY c.fecha;
+select *from VentaTotal;
+
+-- final vistas
+-- funciones 
+
+DELIMITER $$
+CREATE FUNCTION facturas_vendedor(id_vendedor INT) RETURNS INT
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+    DECLARE total_venta INT;
+    SELECT COUNT(*) INTO total_venta FROM compra WHERE vendedor_factura = id_vendedor;
+    RETURN COALESCE(total_venta, 0);
+END;
+$$
+DELIMITER ;
+SELECT facturas_vendedor(2);
+
+DELIMITER $$
+CREATE FUNCTION promedio_precio_productos() RETURNS DECIMAL(10, 2)
+DETERMINISTIC
+READS SQL DATA
+BEGIN
+    DECLARE avg_price DECIMAL(10, 2);
+    SELECT AVG(precio) INTO avg_price FROM producto;
+    RETURN COALESCE(avg_price, 0);
+END;
+$$
+DELIMITER ;
+select promedio_precio_productos();
+
+select * from vendedor;
+
+
+DELIMITER $$
+CREATE FUNCTION actualizar_rendimiento(vendedor_id INT, nuevo_rendimiento VARCHAR(45)) RETURNS INT
+DETERMINISTIC
+BEGIN
+    UPDATE vendedor
+    SET rendimiento = nuevo_rendimiento
+    WHERE id_vendedor = vendedor_id;
+
+    RETURN ROW_COUNT();
+END;
+$$
+DELIMITER ;
+select actualizar_rendimiento( 3 , '93%' );
+
+-- final funciones
+
+-- stored procedure's
+
+DELIMITER $$
+CREATE PROCEDURE ordenar_por_columna(IN nombreColumna VARCHAR(45), IN orden_por VARCHAR(10))
+BEGIN
+    SET @consulta = CONCAT('SELECT * FROM producto ORDER BY ', nombreColumna, ' ', orden_por);
+    PREPARE orden FROM @consulta;
+    EXECUTE orden;
+    DEALLOCATE PREPARE orden;
+END 
+$$ DELIMITER ;
+CALL ordenar_por_columna('nombre_producto', 'ASC');
+
+
+DELIMITER $$
+CREATE PROCEDURE Insert_clientes(
+    IN nombre VARCHAR(45),
+    IN dni INT,
+    IN direccion VARCHAR(45),
+    IN email VARCHAR(45)
+)
+BEGIN
+    INSERT INTO clientes (nombre_cliente, dni_cliente, direccion, email)
+    VALUES (nombre, dni, direccion, email);
+END;
+$$ DELIMITER ;
+CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@live.com');
+
+select * from clientes order by id_cliente desc;
+
+-- fin stored procedure's
