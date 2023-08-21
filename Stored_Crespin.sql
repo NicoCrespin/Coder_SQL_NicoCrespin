@@ -12,7 +12,7 @@ BEGIN
 END 
 $$ DELIMITER ;
 
--- Para utilizarlo cambiar 'nombre_producto' por la culumna elejida y modificar 'ASC' por 'DESC' en caso de querer un orden decendiente, por defecto el SP ordena la tabla de manera ascendente. 
+-- Para utilizarlo cambiar 'nombre_producto' por la culumna elegida y modificar 'ASC' por 'DESC' en caso de querer un orden decendiente, por defecto el SP ordena la tabla de manera ascendente. 
 
 CALL ordenar_por_columna('nombre_producto', 'ASC');
 
