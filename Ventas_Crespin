@@ -398,8 +398,20 @@ BEGIN
     VALUES (nombre, dni, direccion, email);
 END;
 $$ DELIMITER ;
-CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@live.com');
 
+CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@live.com');
 select * from clientes order by id_cliente desc;
+
+
+DELIMITER $$
+CREATE PROCEDURE borrar_cliente(
+    IN id_cliente INT
+)
+BEGIN
+    DELETE FROM clientes WHERE id_cliente = cliente_id;
+END;
+$$ DELIMITER ;
+
+call borrar_cliente()
 
 -- fin stored procedure's
