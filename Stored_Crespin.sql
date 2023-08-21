@@ -16,7 +16,7 @@ $$ DELIMITER ;
 
 CALL ordenar_por_columna('nombre_producto', 'ASC');
 
--- Este sp sirve para la insecion de registros en la tabla clientes.
+-- Este sp sirve para la insercion de registros en la tabla clientes.
 
 DELIMITER $$
 CREATE PROCEDURE Insert_clientes(
