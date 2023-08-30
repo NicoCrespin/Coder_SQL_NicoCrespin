@@ -402,7 +402,6 @@ CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@l
 
 select * from clientes order by id_cliente desc;
 
--- fin stored procedure's
 
 DELIMITER $$
 CREATE PROCEDURE borrar_cliente(
@@ -415,6 +414,7 @@ $$ DELIMITER ;
 
 call borrar_cliente()
 
+-- fin stored procedure's
 -- Triggers
 
 CREATE TABLE _clientes2 (
