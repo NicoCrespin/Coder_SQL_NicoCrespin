@@ -1,5 +1,5 @@
-create schema VENTAS248;
-use VENTAS248; 
+create schema ENT2CRESPIN;
+use ENT2CRESPIN; 
 
 
 CREATE TABLE clientes (
@@ -371,7 +371,6 @@ DELIMITER ;
 select actualizar_rendimiento( 3 , '93%' );
 
 -- final funciones
-
 -- stored procedure's
 
 DELIMITER $$
@@ -402,7 +401,6 @@ CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@l
 
 select * from clientes order by id_cliente desc;
 
-
 DELIMITER $$
 CREATE PROCEDURE borrar_cliente(
     IN id_cliente INT
@@ -412,7 +410,8 @@ BEGIN
 END;
 $$ DELIMITER ;
 
-call borrar_cliente()
+-- call borrar_cliente() 
+-- por alguna razon si no lo comento me da error al ejecutar todo el script de una sola vez
 
 -- fin stored procedure's
 -- Triggers
