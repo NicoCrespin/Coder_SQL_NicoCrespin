@@ -71,3 +71,13 @@ FROM
 	compra c
 GROUP BY c.fecha;
 select *from VentaTotal;
+
+create view MetodoFavo as 
+select 
+	(nombre_pago), sum(1) as cantidad_utilizada 
+from pagos
+group by nombre_pago
+order by cantidad_utilizada desc;
+select *from MetodoFavo;
+
+
