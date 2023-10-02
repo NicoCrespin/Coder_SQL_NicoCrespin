@@ -37,18 +37,65 @@ CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@l
 
 select * from clientes order by id_cliente desc;
 
--- Este sp sirve para borrar registros en la tabla clientes.
-
+-- este SP se encarga de la insercion dentro de la tabla proveedores
 DELIMITER $$
-CREATE PROCEDURE borrar_cliente(
-    IN id_cliente INT
+CREATE PROCEDURE Agrega_Proveedor(
+    IN nombre_proveedor VARCHAR(45),
+    IN direccion VARCHAR(45),
+    IN email VARCHAR(45),
+    IN numero_cuenta INT
 )
 BEGIN
-    DELETE FROM clientes WHERE id_cliente = cliente_id;
+    INSERT INTO proveedor (nombre_proveedor, direccion, email, numero_cuenta)
+    VALUES (nombre_proveedor, direccion, email, numero_cuenta);
 END;
-$$ DELIMITER ;
+$$
+DELIMITER ;
 
--- para utilizarlo colocar el id del cliente a eliminar dentro de los parentesis. 
+-- para utilicarlo remplazaremos los datos dentro del parentesis por los nuevos registros
+#CALL Agrega_Proveedor('Grupo Soul', 'Camino Interfabrica 456', 'Ventas@gruposoul.com', 99949998);
+#select * FROM PROVEEDOR ORDER BY id_proveedor desc;
 
-call borrar_cliente()
+-- este SP se encarga de la actualizacion de los datos dentro de la tabla proveedores.
+DELIMITER $$
+CREATE PROCEDURE Actualiza_Proveedor(
+    IN proveedor_id INT,
+    IN nombre_proveedor VARCHAR(45),
+    IN direccion VARCHAR(45),
+    IN email VARCHAR(45),
+    IN numero_cuenta INT
+)
+BEGIN
+    UPDATE proveedor
+    SET nombre_proveedor = nombre_proveedor,
+        direccion = direccion,
+        email = email,
+        numero_cuenta = numero_cuenta
+    WHERE id_proveedor = proveedor_id;
+END;
+$$
+DELIMITER ;
+
+--para utilizarlo remplazamoas en primera instacia el ID del proveedor que deseamos actualizar y paso seguido cada uno de los nuevos datos.
+#CALL Actualiza_Proveedor(11, 'Grupo Actualizado', 'Actual', 'Actualizado_correo@proveedor.com', 99999999);
+#select * from proveedor order by id_proveedor desc;
+
+
+-- Stored procedure que se encarga de la Eliminacion de registros de la tabla proveedores.
+DELIMITER $$
+CREATE PROCEDURE Elimina_Proveedor(
+    IN proveedor_id INT
+)
+BEGIN
+    DELETE FROM proveedor
+    WHERE id_proveedor = proveedor_id;
+END;
+$$
+DELIMITER ;
+
+-- Para utilizarlo colocamos entre el parentesis el ID del proveedor a eliminar
+#CALL Elimina_Proveedor(11);
+#select * from proveedor order by id_proveedor desc;
+
+
 
