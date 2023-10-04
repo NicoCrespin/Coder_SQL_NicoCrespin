@@ -1,6 +1,7 @@
-create schema ENT2CRESPIN;
-use ENT2CRESPIN; 
+create schema ProyFin_Crespin;
+use ProyFin_Crespin; 
 
+-- Creacion de tablas
 
 CREATE TABLE clientes (
     id_cliente INT PRIMARY KEY AUTO_INCREMENT,
@@ -79,6 +80,7 @@ CREATE TABLE pagos (
     FOREIGN KEY (factura) REFERENCES compra (num_factura)
 );
 
+-- fin tablas
 -- insercion
 
 INSERT INTO clientes VALUES 
@@ -107,7 +109,7 @@ INSERT INTO clientes VALUES
 (NULL,"Roberto White", 90123457, 'Avenida KLM, Ciudad R', 'roberto@example.com'),
 (NULL,"Carmen Lewis", 12345670, 'Calle NOP, Ciudad S', 'carmen@example.com'),
 (NULL,"Gabriel Hill", 23456781, 'Calle QRS, Ciudad T', 'gabriel@example.com');
-SELECT * FROM clientes;
+#SELECT * FROM clientes;
 
 INSERT INTO vendedor VALUES 
 (NULL, "Lauro Acosta", 21546879 , "Carcano 78", '3%', '100%'),
@@ -115,14 +117,13 @@ INSERT INTO vendedor VALUES
 (NULL, "Liliana Corbalan", 36548912 , "Maracaibo 132", '3%', '75%'),
 (NULL, "Nahuel Rivera", 39302587 , "Dean Funes 12", '3%', '85%'),
 (NULL, "Natali Verdun", 40587963 , "Mendoza 2058", '3%', '100%');
-SELECT * FROM vendedor;
+#SELECT * FROM vendedor;
 
 UPDATE clientes
 SET nombre_cliente = 'Rolando Crespín'
 WHERE dni_cliente = 45889321;
- Select * from clientes;
- 
- Select * from proveedor;
+#Select * from clientes;
+#Select * from proveedor;
  
  
 INSERT INTO proveedor (nombre_proveedor, direccion, email, numero_cuenta)
@@ -137,9 +138,9 @@ VALUES
   ('Calzados Express', 'Salta, Ciudad', 'expresscalzados@example.com', 89012345),
   ('Nice Company', 'Santa Fe, Ciudad', 'nice.ventas@example.com', 90123456),
   ('Vero Cuoio', 'San Juan, Ciudad', 'verocuoio@example.com', 12345670);
-  select * from proveedor;
+#select * from proveedor;
   
-  INSERT INTO categoria_producto (tipo_producto, id_proveedor_categoria, stock)
+INSERT INTO categoria_producto (tipo_producto, id_proveedor_categoria, stock)
 VALUES
   ('Zapatos deportivos', 1, 100),
   ('Zapatillas casuales', 2, 150),
@@ -161,9 +162,9 @@ VALUES
   ('Botas de moda', 3, 95),
   ('Mochilas de cuero', 9, 240),
   ('Zapatoas niño', 5, 220);
-  select * from categoria_producto;
+#select * from categoria_producto;
   
-  INSERT INTO producto (nombre_producto, proveedor_producto, precio, categoria, stock)
+INSERT INTO producto (nombre_producto, proveedor_producto, precio, categoria, stock)
 VALUES 
 ('Zapatos Deportivos Rojos', 1, 5000, 1, 10),
 ('Zapatillas Negras Clásicas', 1, 4500, 1, 8),
@@ -214,7 +215,7 @@ VALUES
 ('Zapatos Infantiles de Cuero', 7, 2300, 20, 8),
 ('Botin 7cm', 7, 2600, 7, 24),
 ('Zapatilla Platafoma', 2, 2600, 2, 24);
-select * from producto;
+#select * from producto;
 
 INSERT INTO compra (fecha, vendedor_factura, cliente_factura, total)
 VALUES
@@ -224,8 +225,23 @@ VALUES
     (NOW(), 4, 14, 15000),
     (NOW(), 5, 6, 5500),
     (NOW(), 1, 8, 9500),
-    (NOW(), 2, 22, 15600);
-select * from compra;
+    (NOW(), 2, 22, 15600),
+	(NOW(), 3, 10, 4200),
+    (NOW(), 1, 3, 6200),
+    (NOW(), 5, 12, 1800),
+    (NOW(), 2, 1, 3500),
+    (NOW(), 4, 9, 8000),
+    (NOW(), 3, 11, 2800),
+    (NOW(), 2, 4, 5400),
+    (NOW(), 1, 2, 9500),
+    (NOW(), 5, 7, 11000),
+    (NOW(), 4, 6, 3200),
+    (NOW(), 2, 8, 7600),
+    (NOW(), 3, 5, 4200),
+    (NOW(), 1, 15, 6300),
+    (NOW(), 5, 13, 2100),
+    (NOW(), 4, 16, 9800);
+#select * from compra;
 
 INSERT INTO detalles_compra (id_detalle, id_compra, producto, cantidad)
 VALUES
@@ -235,8 +251,23 @@ VALUES
     (null, 4, 8, 2),
     (null, 5, 25, 1),
     (null, 6, 39, 1),
-    (null, 7, 32, 2);
-select * from detalles_compra;
+    (null, 7, 32, 2),
+	(null, 8, 28, 2),
+    (null, 9, 10, 1),
+    (null, 10, 24, 3),
+    (null, 11, 19, 2),
+    (null, 12, 6, 1),
+    (null, 13, 17, 4),
+    (null, 14, 22, 2),
+    (null, 15, 31, 1),
+    (null, 16, 2, 3),
+    (null, 17, 14, 2),
+    (null, 18, 21, 1),
+    (null, 19, 36, 2),
+    (null, 20, 27, 1),
+    (null, 21, 3, 3),
+    (null, 22, 5, 2);
+#select * from detalles_compra;
 
 INSERT INTO pagos (nombre_pago, factura)
 VALUES
@@ -246,8 +277,23 @@ VALUES
     ('MAESTRO', 4),
     ('MERCADO PAGO', 5),
     ('GO CUOTAS', 6),
-    ('NARANJA', 7);
-select * FROM PAGOS; 
+    ('NARANJA', 7),
+	('EFECTIVO', 8),
+    ('DEBITO MASTEERCARD', 9),
+    ('DEBITO VISA', 10),
+    ('MAESTRO', 11),
+    ('MERCADO PAGO', 12),
+    ('NARANJA', 13),
+    ('NARANJA', 14),
+    ('EFECTIVO', 15),
+    ('DEBITO MASTEERCARD', 16),
+    ('DEBITO VISA', 17),
+    ('EFECTIVO', 18),
+    ('MERCADO PAGO', 19),
+    ('GO CUOTAS', 20),
+    ('NARANJA', 21),
+    ('EFECTIVO', 22);
+#select * FROM PAGOS; 
 
 -- final de insecion
 -- vistas
@@ -263,7 +309,7 @@ JOIN
     categoria_producto cp ON p.categoria = cp.id_categoria
 JOIN
     proveedor pr ON p.proveedor_producto = pr.id_proveedor;
-select * from DetalleProducto;
+#select * from DetalleProducto;
 
 
 CREATE VIEW Facturacion AS
@@ -287,7 +333,7 @@ JOIN
     producto p ON dc.producto = p.id_producto
 JOIN
     pagos pa ON c.num_factura = pa.factura;
-select * from Facturacion;
+#select * from Facturacion;
 
 
 CREATE VIEW MasVendidos AS
@@ -300,7 +346,7 @@ JOIN
 	detalles_compra dc ON p.id_producto = dc.producto
 GROUP BY p.nombre_producto
 ORDER BY Cantidad DESC;
-select * from MasVendidos;
+#select * from MasVendidos;
 
 
 CREATE VIEW StockActual AS
@@ -312,7 +358,7 @@ FROM
 JOIN 
 	producto p ON cp.id_categoria = p.categoria
 GROUP BY cp.tipo_producto;
-select *from StockActual;
+#select *from StockActual;
 
 
 CREATE VIEW VentaTotal AS
@@ -322,7 +368,15 @@ SELECT
 FROM 
 	compra c
 GROUP BY c.fecha;
-select *from VentaTotal;
+#select *from VentaTotal;
+
+CREATE VIEW MetodoFavo AS 
+SELECT 
+	(nombre_pago), sum(1) AS cantidad_utilizada 
+FROM pagos
+GROUP BY nombre_pago
+ORDER BY cantidad_utilizada DESC;
+#Select *from MetodoFavo;
 
 -- final vistas
 -- funciones 
@@ -338,7 +392,7 @@ BEGIN
 END;
 $$
 DELIMITER ;
-SELECT facturas_vendedor(2);
+#SELECT facturas_vendedor(2;
 
 DELIMITER $$
 CREATE FUNCTION promedio_precio_productos() RETURNS DECIMAL(10, 2)
@@ -351,9 +405,7 @@ BEGIN
 END;
 $$
 DELIMITER ;
-select promedio_precio_productos();
-
-select * from vendedor;
+#select promedio_precio_productos();
 
 
 DELIMITER $$
@@ -368,7 +420,7 @@ BEGIN
 END;
 $$
 DELIMITER ;
-select actualizar_rendimiento( 3 , '93%' );
+#Select actualizar_rendimiento( 3 , '93%' );
 
 -- final funciones
 -- stored procedure's
@@ -382,7 +434,7 @@ BEGIN
     DEALLOCATE PREPARE orden;
 END 
 $$ DELIMITER ;
-CALL ordenar_por_columna('nombre_producto', 'ASC');
+#CALL ordenar_por_columna('nombre_producto', 'ASC');
 
 
 DELIMITER $$
@@ -397,21 +449,63 @@ BEGIN
     VALUES (nombre, dni, direccion, email);
 END;
 $$ DELIMITER ;
-CALL Insert_clientes('Pepito Flores', 24877888, 'Juan B Justo 4066', 'ppflores@live.com');
+#CALL Insert_clientes('Milagros Peralta', 41233554, 'Los Tintines 123', 'milipe.mp@live.com');
+#CALL Insert_clientes('Agistin Cisneros', 41233333, 'Manuel Lucero 133', 'aguscis@live.com');
+#realizo un select para ver si se inserto correctamente
+#select * from clientes order by id_cliente desc;
 
-select * from clientes order by id_cliente desc;
+
 
 DELIMITER $$
-CREATE PROCEDURE borrar_cliente(
-    IN id_cliente INT
+CREATE PROCEDURE Agrega_Proveedor(
+    IN nombre_proveedor VARCHAR(45),
+    IN direccion VARCHAR(45),
+    IN email VARCHAR(45),
+    IN numero_cuenta INT
 )
 BEGIN
-    DELETE FROM clientes WHERE id_cliente = cliente_id;
+    INSERT INTO proveedor (nombre_proveedor, direccion, email, numero_cuenta)
+    VALUES (nombre_proveedor, direccion, email, numero_cuenta);
 END;
-$$ DELIMITER ;
+$$
+DELIMITER ;
+#CALL Agrega_Proveedor('Grupo Soul', 'Camino Interfabrica 456', 'Ventas@gruposoul.com', 99949998);
+#select * FROM PROVEEDOR ORDER BY id_proveedor desc;
 
--- call borrar_cliente() 
--- por alguna razon si no lo comento me da error al ejecutar todo el script de una sola vez
+DELIMITER $$
+CREATE PROCEDURE Actualiza_Proveedor(
+    IN proveedor_id INT,
+    IN nombre_proveedor VARCHAR(45),
+    IN direccion VARCHAR(45),
+    IN email VARCHAR(45),
+    IN numero_cuenta INT
+)
+BEGIN
+    UPDATE proveedor
+    SET nombre_proveedor = nombre_proveedor,
+        direccion = direccion,
+        email = email,
+        numero_cuenta = numero_cuenta
+    WHERE id_proveedor = proveedor_id;
+END;
+$$
+DELIMITER ;
+#CALL Actualiza_Proveedor(11, 'Grupo Actualizado', 'Actual', 'Actualizado_correo@proveedor.com', 99999999);
+#select * from proveedor order by id_proveedor desc;
+
+DELIMITER $$
+CREATE PROCEDURE Elimina_Proveedor(
+    IN proveedor_id INT
+)
+BEGIN
+    DELETE FROM proveedor
+    WHERE id_proveedor = proveedor_id;
+END;
+$$
+DELIMITER ;
+#CALL Elimina_Proveedor(11);
+#select * from proveedor order by id_proveedor desc;
+
 
 -- fin stored procedure's
 -- Triggers
@@ -452,15 +546,15 @@ $$ DELIMITER ;
 INSERT INTO clientes VALUES 
 (NULL,"ileana Contreras", 32555888 , "Santiso y moscoso 12", 'ili22@dato.com'),
 (NULL,"Nico Crespini", 39300333 , "Lavalleja 1225", 'Niacc@dato.com');
-select * from clientes order by id_cliente desc;
-select * from _clientes2;
+#select * from clientes order by id_cliente desc;
+#select * from _clientes2;
 
 UPDATE clientes
 SET nombre_cliente = "Jose Luis"
 WHERE id_cliente = 1;
-select * from _clientes2;
+#select * from _clientes2;
+#select * from clientes order by id_cliente asc;
 
-DROP TRIGGER IF EXISTS despues_delete_cl;
 
 CREATE TABLE _producto2 (
     id_aud INT PRIMARY KEY AUTO_INCREMENT,
@@ -496,13 +590,14 @@ BEGIN
 END;
 $$ DELIMITER ;
 
-INSERT INTO producto (nombre_producto, proveedor_producto, precio, categoria, stock)
-VALUES ('Zapatos Deportivos fuxia', 1, 5100, 1, 10);
-select * from producto order by id_producto desc;
-select * from _producto2;
+#INSERT INTO producto (nombre_producto, proveedor_producto, precio, categoria, stock)
+#VALUES ('Zapatos Deportivos fuxia', 1, 5100, 1, 10);
+#select * from producto order by id_producto desc;
+#select * from _producto2;
 
-delete from producto where id_producto = 23;
-select * from producto order by id_producto desc;
-select * from _producto2;
+#delete from producto where id_producto = 23;
+#select * from producto order by id_producto desc;
+#select * from _producto2;
 
 -- Fin triggers
+
